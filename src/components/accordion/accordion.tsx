@@ -4,21 +4,27 @@ import { ReactComponent as Plusicon } from '../../assets/plus-icon.svg';
 
 import './accordion.css'
 
+interface accordionTypes {
+    number: number,
+    question: string,
+    answer: string
+}
+
 const Accordion = ({
     number,
     question,
     answer
-}) => {
+}: accordionTypes | any) => {
     const className = 'accordion'
 
     //useState hooks for active value and answerHeight
-    const [setActive, setActiveState] = useState('');
-    const [answerHeight, setAnswerHeight] = useState('0px')
+    const [setActive, setActiveState] = useState<string>('');
+    const [answerHeight, setAnswerHeight] = useState<string>('0px')
 
-    const content = useRef(null) // Referencing the answer text
+    const content: any = useRef(null) // Referencing the answer text
 
     // Toggle accordion onclick event
-    const toggleAccordion = () => {
+    const toggleAccordion = (): void => {
         setActiveState(!setActive ? 'active' : '') //if active state is null set 'active'
         setAnswerHeight(setActive === 'active' ? '0px' : `${content.current.scrollHeight}px`) //set height of answer Ref if question is active.
     }

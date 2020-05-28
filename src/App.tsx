@@ -3,12 +3,17 @@ import Accordion from './components/accordion/accordion';
 
 const App = () => {
 
+  interface faqData {
+    question: string,
+    answer: string
+  }
+
   // faqData state, useState hook used to set and retrieve data
-  const [faqData, setFaqData] = useState()
-  const [error, setError] = useState()
+  const [faqData, setFaqData] = useState<faqData[]>()
+  const [error, setError] = useState<String>()
 
   // initalising request parameters for fetching the data.
-  const myInit = {
+  const myInit: Object = {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -29,7 +34,7 @@ const App = () => {
     .then(data => setFaqData(data))
 
     // Catch to prevent any exceptions - error is also stored in state.
-    .catch(error => setError(error), console.log(error))
+    .catch(error => setError(error))
   }
 
   // Each time the app is rendered, useEffect fires, which also fires the fetchData function
@@ -44,7 +49,7 @@ const App = () => {
       <div className="accordion">
       <h1 className="accordion-title">Have a Question? We can help</h1>
       {faqData.map((item,index) => {
-        const questionMumber = index + 1
+        const questionMumber: number = index + 1;
         return (
           <Accordion key={index} number={questionMumber} question={item.question} answer={item.answer} />
         )
