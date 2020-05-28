@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion component Snapshot for accordion component 1`] = `
+<div
+  className="accordion__item"
+>
+  <div
+    className="accordion__question "
+    onClick={[Function]}
+  >
+    <div
+      className="question-num"
+    >
+      <span>
+        Q
+        1
+      </span>
+    </div>
+    <div
+      className="question-text"
+    >
+      <span>
+        question text
+      </span>
+    </div>
+    <div
+      className="question-toggle"
+    >
+      <div
+        className="question-toggle__svg"
+      >
+        <svg>
+          plus-icon.svg
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div
+    className="accordion__answer"
+    style={
+      Object {
+        "maxHeight": "0px",
+      }
+    }
+  >
+    <p>
+      answer text
+    </p>
+  </div>
+</div>
+`;

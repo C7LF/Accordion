@@ -1,26 +1,65 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Accordion from './components/accordion/accordion';
 
-function App() {
+const App = () => {
+
+  // faqData state, useState hook used to set and retrieve data
+  const [faqData, setFaqData] = useState()
+  const [error, setError] = useState()
+
+  // initalising request parameters for fetching the data.
+  const myInit = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    cache: 'default'
+  }
+
+  // define new request to faqs.json plased in public folder
+  let faqRequest = new Request('./faqs.json', myInit)
+  
+  // Fetch data function, promises used to handle the data
+  const fetchData = () => {
+     fetch(faqRequest)
+    .then(res => res.json())
+    
+    // When data is recieved and parsed, it is stored in state.
+    .then(data => setFaqData(data))
+
+    // Catch to prevent any exceptions - error is also stored in state.
+    .catch(error => setError(error), console.log(error))
+  }
+
+  // Each time the app is rendered, useEffect fires, which also fires the fetchData function
+  // useEffect takes an input as a parameter, in this case it is an empty array which only runs on Mount and UnMount.
+  useEffect( () => {
+    fetchData()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    // Tenary operator to check if faqData has any state. This prevents the component from rendering if the data couldn't be fetched.
+    faqData ? (
+      <div className="accordion">
+      <h1 className="accordion-title">Have a Question? We can help</h1>
+      {faqData.map((item,index) => {
+        const questionMumber = index + 1
+        return (
+          <Accordion key={index} number={questionMumber} question={item.question} answer={item.answer} />
+        )
+      })}
     </div>
-  );
+    ) : (
+      <>
+        {error ? (
+          <p>There has been an error loading the pages data</p>
+        ) : (
+          <p>Loading</p>
+        )}
+      </>
+    )
+  )
 }
 
 export default App;

@@ -1,13 +1,35 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: 'OswaldBold';
+  src: local('OswaldBold'), url(./assets/fonts/oswald-bold.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'OswaldLight';
+  src: local('OswaldLight'), url(./assets/fonts/oswald-light.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'OswaldReg';
+  src: local('OswaldReg'), url(./assets/fonts/oswald-regular.ttf) format('truetype');
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  font-family: OswaldReg, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color:#1b1d1b;
+}
+.accordion {
+  max-width:700px;
+  margin:0 auto;
+}
+@media(max-width: 756px) {
+  .accordion {
+    padding:0px 15px;
+  }
+}
+.accordion-title {
+  font-family: OswaldBold;
+  text-transform: uppercase;
+  border-bottom: 15px solid #1b1d1b;
+  padding-bottom:15px;
 }
